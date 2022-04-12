@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,27 +22,10 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class FishingLureServiceTest {
+@ActiveProfiles("junit")
 
+public class FishingLureServiceTest {
     @Mock private FishingLureRepository fishingLureRepository;
     private AutoCloseable autoCloseable;
     private FishingLureService underTest;
-
-    @BeforeEach
-    void setUp() {
-        autoCloseable = MockitoAnnotations.openMocks(this);
-        underTest = new FishingLureService(fishingLureRepository);
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-        autoCloseable.close();
-    }
-
-    @Test
-    void canGetAllFishingLures() {
-        underTest.getFishLures();
-
-        verify(fishingLureRepository.findAll());
-    }
 }

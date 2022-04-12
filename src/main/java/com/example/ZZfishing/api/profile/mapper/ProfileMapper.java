@@ -1,4 +1,11 @@
 package com.example.ZZfishing.api.profile.mapper;
 
-public class ProfileMapper {
+import com.example.ZZfishing.api.profile.controller.dto.ProfileDto;
+import com.example.ZZfishing.api.profile.repository.entity.Profile;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface ProfileMapper {
+
+    ProfileDto toProfileDto(Profile profile);
 }
