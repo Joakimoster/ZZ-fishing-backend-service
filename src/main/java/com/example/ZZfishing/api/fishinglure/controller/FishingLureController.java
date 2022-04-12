@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.fishinglure.controller;
 
+import com.example.ZZfishing.api.fishinglure.mapper.FishingLureMapper;
 import com.example.ZZfishing.api.fishinglure.service.FishingLureService;
 import com.example.ZZfishing.api.fishinglure.repository.entity.FishingLure;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import java.util.List;
 public class FishingLureController {
 
     private final FishingLureService fishingLureService;
+    private final FishingLureMapper mapper;
 
-    public FishingLureController(FishingLureService fishingLureService) {
+    public FishingLureController(FishingLureService fishingLureService, FishingLureMapper mapper) {
         this.fishingLureService = fishingLureService;
+        this.mapper = mapper;
     }
 
     @GetMapping

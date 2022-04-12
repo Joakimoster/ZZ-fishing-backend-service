@@ -1,0 +1,13 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!src/main/**/target/
+!src/test/**/target/
+
+### Application ###
+.env
+env/*
+env
+src/main/resources/files/*
+src/main/resources/logs/*
+!application-default.properties
+application-*.properties
