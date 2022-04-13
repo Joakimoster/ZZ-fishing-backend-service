@@ -1,6 +1,6 @@
 package com.example.ZZfishing.api.profile.repository.entity;
 
-import com.example.ZZfishing.api.programuser.repository.entity.ProgramUser;
+import com.example.ZZfishing.api.user.repository.entity.User;
 
 import javax.persistence.*;
 
@@ -16,8 +16,8 @@ public class Profile {
     private String email;
     private Integer age;
 
-    @OneToOne(mappedBy = "profile")
-    private ProgramUser programUser;
+    @OneToOne(mappedBy = "profile",cascade= CascadeType.ALL)
+    private User user;
 
     public Profile() {
     }
@@ -60,6 +60,10 @@ public class Profile {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
 
     @Override
     public String toString() {
