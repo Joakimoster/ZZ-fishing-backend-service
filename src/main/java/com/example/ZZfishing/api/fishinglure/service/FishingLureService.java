@@ -1,12 +1,15 @@
 package com.example.ZZfishing.api.fishinglure.service;
 
 import com.example.ZZfishing.api.fish.exception.FishNotFoundException;
+import com.example.ZZfishing.api.fishinglure.controller.dto.FishingLureDto;
 import com.example.ZZfishing.api.fishinglure.exception.FishingLureNotDeletedException;
 import com.example.ZZfishing.api.fishinglure.exception.FishingLureNotFoundException;
+import com.example.ZZfishing.api.fishinglure.mapper.FishingLureMapper;
 import com.example.ZZfishing.api.fishinglure.repository.FishingLureRepository;
 import com.example.ZZfishing.api.fishinglure.repository.entity.FishingLure;
 import com.example.ZZfishing.utils.IdUtil;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +19,15 @@ import java.util.Objects;
 public class FishingLureService {
 
     private final FishingLureRepository fishingLureRepository;
+    private final ApplicationEventPublisher eventPublisher;
+    private final FishingLureMapper mapper;
 
     public FishingLureService(
-            FishingLureRepository fishingLureRepository) {
+            FishingLureRepository fishingLureRepository,
+            ApplicationEventPublisher eventPublisher, FishingLureMapper mapper) {
                 this.fishingLureRepository = fishingLureRepository;
+                this.eventPublisher = eventPublisher;
+                this.mapper = mapper;
     }
 
     public List<FishingLure> getFishLures() {
@@ -61,8 +69,15 @@ public class FishingLureService {
     }
 
     public FishingLure fetchFishingLureById(Long fishingLureId) {
-        IdUtil.assertId(fishingLureId);
+        //IdUtil.assertId(fishingLureId);
         return fishingLureRepository.findById(fishingLureId).orElseThrow(
-                () -> new FishNotFoundException(fishingLureId));
+                () -> new FishingLureNotFoundException(fishingLureId));
+    }
+
+    public FishingLureDto getFishingLureDto(long id) {
+        if (fishingLureRepository.existsById(id)) {
+            return mapper.toFishingLureDto(fishingLureRepository.getById(id));
+        }
+        throw new FishingLureNotFoundException(id);
     }
 }
