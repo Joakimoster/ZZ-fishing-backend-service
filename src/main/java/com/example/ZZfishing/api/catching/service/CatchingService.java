@@ -25,8 +25,8 @@ public class CatchingService {
         return catchingRepository.findAll();
     }
 
-    public void addNewCatching(Catching catching) {
-        catchingRepository.save(catching);
+    public Catching addNewCatching(Catching catching) {
+        return catchingRepository.save(catching);
     }
 
     public void deleteCatching(Long catchingId) {
@@ -38,7 +38,7 @@ public class CatchingService {
         catchingRepository.deleteById(catchingId);
     }
 
-    public void updateCatching(Long catchingId, Catching catching) {
+    public Catching updateCatching(Long catchingId, Catching catching) {
         Catching catchingDB = catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
 
@@ -46,7 +46,7 @@ public class CatchingService {
                 !"".equalsIgnoreCase(catching.getFish())) {
                 catchingDB.setFish(catching.getFish());
         }
-        catchingRepository.save(catchingDB);
+        return catchingRepository.save(catchingDB);
     }
 
     public Catching fetchCatchingById(Long catchingId) {
