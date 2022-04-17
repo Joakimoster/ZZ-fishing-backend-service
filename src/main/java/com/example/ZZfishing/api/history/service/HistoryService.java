@@ -27,8 +27,8 @@ public class HistoryService {
         return historyRepository.findAll();
     }
 
-    public void addNewHistory(History history) {
-        historyRepository.save(history);
+    public History addNewHistory(History history) {
+        return historyRepository.save(history);
     }
 
     public void deleteHistory(Long historyId) {
@@ -40,7 +40,7 @@ public class HistoryService {
         historyRepository.deleteById(historyId);
     }
 
-    public void updateHistory(Long historyId, History history) {
+    public History updateHistory(Long historyId, History history) {
         History historyDB = historyRepository.findById(historyId).orElseThrow(
                 () -> new ProfileNotFoundException(historyId));
 
@@ -50,7 +50,7 @@ public class HistoryService {
         if (Objects.nonNull(history.getCatchings())) {
             historyDB.setCatchings(history.getCatchings());
         }
-        historyRepository.save(historyDB);
+        return historyRepository.save(historyDB);
     }
 
     public History fetchHistoryById(Long historyId) {

@@ -34,8 +34,8 @@ public class FishingLureService {
         return fishingLureRepository.findAll();
     }
 
-    public void addNewFishLure(FishingLure fishingLure) {
-        fishingLureRepository.save(fishingLure);
+    public FishingLure addNewFishLure(FishingLure fishingLure) {
+        return fishingLureRepository.save(fishingLure);
     }
 
     public void deleteFishingLure(Long fishingLureId) {
@@ -47,7 +47,7 @@ public class FishingLureService {
         fishingLureRepository.deleteById(fishingLureId);
     }
 
-    public void updateFishingLure(Long fishingLureId, FishingLure fishingLure) {
+    public FishingLure updateFishingLure(Long fishingLureId, FishingLure fishingLure) {
         FishingLure fishingLureDB = fishingLureRepository.findById(fishingLureId).
                 orElseThrow(() -> new FishingLureNotFoundException(fishingLureId));
 
@@ -65,7 +65,7 @@ public class FishingLureService {
         if (fishingLure.getWeight() != 0) {
             fishingLureDB.setWeight(fishingLure.getWeight());
         }
-        fishingLureRepository.save(fishingLureDB);
+        return fishingLureRepository.save(fishingLureDB);
     }
 
     public FishingLure fetchFishingLureById(Long fishingLureId) {

@@ -33,13 +33,13 @@ public class ProfileService {
         return profileRepository.findAll();
     }
 
-    public void addNewProfile(Profile profile) {
+    public Profile addNewProfile(Profile profile) {
         Optional<Profile> profileOptional = profileRepository
                 .findProfileByEmail(profile.getEmail());
         if (profileOptional.isPresent()) {
             throw new ProfileEmailTakenException(profile.getEmail());
         }
-        profileRepository.save(profile);
+        return profileRepository.save(profile);
     }
 
     public Profile addNewProfileDto(Profile profile) {
@@ -59,7 +59,7 @@ public class ProfileService {
         }
         profileRepository.deleteById(profileId);
     }
-    public void updateProfile(Long profileId, Profile profile) {
+    public Profile updateProfile(Long profileId, Profile profile) {
         Profile profileDB = profileRepository.findById(profileId).orElseThrow(
                 () -> new ProfileNotFoundException(profileId));
 
@@ -74,7 +74,7 @@ public class ProfileService {
         if (profile.getAge() != 0) {
             profileDB.setAge(profile.getAge());
         }
-        profileRepository.save(profileDB);
+        return profileRepository.save(profileDB);
     }
 
     public Profile fetchProfileById(Long profileId) {
