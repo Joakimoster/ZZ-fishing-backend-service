@@ -2,7 +2,6 @@ package com.example.ZZfishing.api.fish.service;
 
 import com.example.ZZfishing.api.fish.exception.FishNotDeletedException;
 import com.example.ZZfishing.api.fish.exception.FishNotFoundException;
-import com.example.ZZfishing.api.fish.exception.FishNotUpdatedException;
 import com.example.ZZfishing.api.fish.repository.FishRepository;
 import com.example.ZZfishing.api.fish.repository.entity.Fish;
 import com.example.ZZfishing.model.exception.IdNotValidException;

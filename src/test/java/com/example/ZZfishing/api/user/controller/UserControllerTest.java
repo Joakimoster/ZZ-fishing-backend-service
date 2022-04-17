@@ -2,7 +2,7 @@ package com.example.ZZfishing.api.user.controller;
 
 import com.example.ZZfishing.api.profile.repository.entity.Profile;
 import com.example.ZZfishing.api.user.repository.entity.User;
-import com.example.ZZfishing.api.user.service.ProgramUserService;
+import com.example.ZZfishing.api.user.service.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,63 +26,59 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @ActiveProfiles("junit")
-@WebMvcTest({ProgramUserController.class})
-class ProgramUserControllerTest {
+@WebMvcTest({UserController.class})
+class UserControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
-    ProgramUserService programUserService;
+    UserService userService;
 
     @Autowired
-    private ProgramUserController programUserController;
+    private UserController userController;
 
     private static final Long VALID_ID = 1L;
 
-
     @Test
-    void canGetAllProgramUsers() throws Exception {
-        List<User> programUsersList = List.of(
-                getProgramUser(VALID_ID)
+    void canGetAllUsers() throws Exception {
+        List<User> userList = List.of(
+                getUser(VALID_ID)
         );
 
-        when(programUserService.getProgramUsers()).thenReturn(programUsersList);
+        when(userService.getUsers()).thenReturn(userList);
 
         mockMvc.perform(
-                get("/api/v1/programUser"))
+                get("/api/v1/user"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
     @Test
-    void canGetProgramUserById() throws Exception {
-        User programUser = getProgramUser(VALID_ID);
-        when(programUserService.fetchProgramUserById(1L))
-                .thenReturn(programUser);
+    void canGetUserById() throws Exception {
+        User user = getUser(VALID_ID);
+        when(userService.fetchUserById(1L))
+                .thenReturn(user);
         mockMvc.perform(
-                get("/api/v1/programUser/{id}", 1L))
+                get("/api/v1/user/{id}", 1L))
                 .andExpect(status().isOk());
     }
 
-    @Test
+    /*@Test
     void canThrowProgramUserIdNotFoundException() throws Exception {
-
-
-
-        /*ProgramUser programUser = getProgramUser(VALID_ID);
+        ProgramUser programUser = getProgramUser(VALID_ID);
 
         when(programUserService.fetchProgramUserById(2L))
                 .thenThrow(ProgramUserNotFoundException.class);
         //doThrow(new ProgramUserNotFoundException(1L)).when(programUserService).fetchProgramUserById(1L);
 
         mockMvc.perform(get("/api/v1/programUser/{id}", 2L))
-                .andExpect(status().isNotFound());*/
-    }
+                .andExpect(status().isNotFound());
+    }*/
 
     @Test
-    public void findAllProgramUsers_invalidRequest_throwNoDataFound() throws Throwable {
+    public void findAllUsers_invalidRequest_throwNoDataFound() throws Throwable {
         Assertions.assertThatThrownBy(() ->
-                        mockMvc.perform(get("/api/v1/programUser/{id}")).andExpect(status().isInternalServerError())
+                        mockMvc.perform(get("/api/v1/user/{id}")).andExpect(status().isInternalServerError())
                                 .andExpect(status().is4xxClientError())
                                 .andExpect(content().string("{\"error\":\"not found\"}")));
     }
@@ -100,34 +96,34 @@ class ProgramUserControllerTest {
     }*/
 
     @Test
-    void canDeleteProgramUser() throws Exception {
-        User programUser = getProgramUser(VALID_ID);
-        when(programUserService.fetchProgramUserById(VALID_ID))
-                .thenReturn(programUser);
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/programUser/{id}", 1L))
+    void canDeleteUser() throws Exception {
+        User user = getUser(VALID_ID);
+        when(userService.fetchUserById(VALID_ID))
+                .thenReturn(user);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user/{id}", 1L))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void canAddNewProgramUser() throws Exception {
-        User programUser = getProgramUser(VALID_ID);
+    void canAddNewUser() throws Exception {
+        User user = getUser(VALID_ID);
 
-        when(programUserService.addNewProgramUser(programUser))
-                .thenReturn(programUser);
+        when(userService.addNewUser(user))
+                .thenReturn(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/programUser")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user")
                 .contentType(MediaType.APPLICATION_JSON).content("{}"))
                 .andExpect(status().isCreated());
     }
 
-    private static User getProgramUser(Long id) {
-        User programUser = new User();
-        programUser.setEmail("Apaserdig@hotmail.com");
-        programUser.setFirstName("Hanses");
-        programUser.setLastName("Fremmet");
-        programUser.setPassword("Hej123");
-        programUser.setProfile(new Profile());
-        programUser.setId(id);
-        return programUser;
+    private static User getUser(Long id) {
+        User user = new User();
+        user.setEmail("Apaserdig@hotmail.com");
+        user.setFirstName("Hanses");
+        user.setLastName("Fremmet");
+        user.setPassword("Hej123");
+        user.setProfile(new Profile());
+        user.setId(id);
+        return user;
     }
 }
