@@ -22,14 +22,11 @@ public class UserController {
     }
 
     @GetMapping
-    @Operation(
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "All users fetched"),
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Unable to fetch users due to internal error")
-                    })
+    @Operation(summary = "Fetch all users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All users are fetched"),
+            @ApiResponse(responseCode = "500", description = "Unable to fetch all users due to internal error")
+    })
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getUsers().stream().toList();
         HttpStatus httpStatus = HttpStatus.OK;
