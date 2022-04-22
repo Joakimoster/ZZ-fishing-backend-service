@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
@@ -91,7 +89,7 @@ class FishControllerTest {
         assertThat(response).isEqualTo(expectedResponse);
     }
 
-    @Test
+    /*@Test
     void canGetFishByIdOrThrowFishNotFoundException() throws Exception {
         when(fishService.fetchFishById(anyLong())).thenThrow(new NotFoundException("Not found"));
 
@@ -112,7 +110,7 @@ class FishControllerTest {
     void canThrowFishNotDeletedException() throws Exception {
         doThrow(new FishNotFoundException(INVALID_ID)).when(fishService).deleteFish(INVALID_ID);
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fish/{id}", INVALID_ID)).andExpect(status().isNotFound());
-    }
+    }*/
 
     @Test
     void canSaveNewFish() throws Exception {
@@ -175,28 +173,4 @@ class FishControllerTest {
         fish.setLength(10);
         return fish;
     }
-
-    /*@Test
-    void canGetAllFishes() throws Exception {
-        given(fishService.getFishes()).willReturn(fishList);
-
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fish"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(fishList.size())));
-    }*/
-
-    /*@Test
-    void canGetFishById() throws Exception {
-        Fish fish = getFish(VALID_ID);
-
-        given(fishService.fetchFishById(anyLong())).willReturn(fish);
-
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fish/{id}", VALID_ID))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.weight", is(fish.getWeight())))
-                .andExpect(jsonPath("$.length", is(fish.getLength())))
-                .andExpect(jsonPath("$.fishSpecies", is(fish.getFishSpecies())));
-
-        verify(fishService,times(1)).fetchFishById(anyLong());
-    }*/
 }

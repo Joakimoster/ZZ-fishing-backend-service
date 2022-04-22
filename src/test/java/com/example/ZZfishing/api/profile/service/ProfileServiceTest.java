@@ -1,6 +1,7 @@
 package com.example.ZZfishing.api.profile.service;
 
 import com.example.ZZfishing.api.profile.exception.ProfileNotFoundException;
+import com.example.ZZfishing.api.profile.mapper.ProfileMapper;
 import com.example.ZZfishing.api.profile.repository.ProfileRepository;
 import com.example.ZZfishing.api.profile.repository.entity.Profile;
 import com.example.ZZfishing.model.exception.IdNotValidException;
@@ -24,7 +25,8 @@ class ProfileServiceTest {
 
     private final ProfileRepository repository = Mockito.mock(ProfileRepository.class);
     private final ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class);
-    private final ProfileService profileService = new ProfileService(repository, publisher);
+    private final ProfileMapper profileMapper = Mockito.mock(ProfileMapper.class);
+    private final ProfileService profileService = new ProfileService(repository, publisher, profileMapper);
 
     private static final Long VALID_ID = 1L;
     private static final Long INVALID_ID = -1L;

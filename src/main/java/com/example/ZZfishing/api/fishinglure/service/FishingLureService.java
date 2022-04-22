@@ -1,15 +1,12 @@
 package com.example.ZZfishing.api.fishinglure.service;
 
-import com.example.ZZfishing.api.fish.exception.FishNotFoundException;
 import com.example.ZZfishing.api.fishinglure.controller.dto.FishingLureDto;
 import com.example.ZZfishing.api.fishinglure.exception.FishingLureNotDeletedException;
 import com.example.ZZfishing.api.fishinglure.exception.FishingLureNotFoundException;
 import com.example.ZZfishing.api.fishinglure.mapper.FishingLureMapper;
 import com.example.ZZfishing.api.fishinglure.repository.FishingLureRepository;
 import com.example.ZZfishing.api.fishinglure.repository.entity.FishingLure;
-import com.example.ZZfishing.utils.IdUtil;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

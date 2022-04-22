@@ -1,13 +1,12 @@
 package com.example.ZZfishing.api.profile.controller;
 
 import com.example.ZZfishing.api.profile.controller.dto.ProfileDto;
+import com.example.ZZfishing.api.profile.mapper.ProfileMapper;
 import com.example.ZZfishing.api.profile.service.ProfileService;
 import com.example.ZZfishing.api.profile.repository.entity.Profile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +18,11 @@ import java.util.List;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final ProfileMapper profileMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, ProfileMapper profileMapper) {
         this.profileService = profileService;
+        this.profileMapper = profileMapper;
     }
 
     @GetMapping
@@ -48,7 +46,7 @@ public class ProfileController {
     public ResponseEntity<ProfileDto> getProfileByDto(@PathVariable("profileId") Long profileId) {
         Profile profile = profileService.fetchProfileById(profileId);
 
-        ProfileDto postResponse = modelMapper.map(profile, ProfileDto.class);
+        ProfileDto postResponse = profileMapper.toProfileDto(profile);
         return ResponseEntity.ok().body(postResponse);
     }
 
@@ -84,11 +82,13 @@ public class ProfileController {
             @ApiResponse(responseCode = "500", description = "Unable to create a new profileDto due to internal error")
     })
     public ResponseEntity<ProfileDto> registerNewDtoProfile(@RequestBody ProfileDto profileDto) {
-        Profile profileRequest = modelMapper.map(profileDto, Profile.class);
-        Profile profile = profileService.addNewProfileDto(profileRequest);
+        Profile profileRequest = new Profile();
+        profileMapper.toProfileDto(profileRequest);
 
-        ProfileDto profileResponse = modelMapper.map(profile, ProfileDto.class);
-        return new ResponseEntity<>(profileResponse, HttpStatus.CREATED);
+        Profile profile = profileService.addNewProfile(profileRequest);
+        ProfileDto profileResponse = profileMapper.toProfileDto(profile);
+
+        return new ResponseEntity<ProfileDto>(profileResponse, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{profileId}")
