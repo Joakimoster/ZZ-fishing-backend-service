@@ -3,6 +3,7 @@ package com.example.ZZfishing.api.profile.service;
 import com.example.ZZfishing.api.profile.exception.ProfileEmailTakenException;
 import com.example.ZZfishing.api.profile.exception.ProfileNotDeletedException;
 import com.example.ZZfishing.api.profile.exception.ProfileNotFoundException;
+import com.example.ZZfishing.api.profile.mapper.ProfileMapper;
 import com.example.ZZfishing.api.profile.repository.ProfileRepository;
 import com.example.ZZfishing.api.profile.repository.entity.Profile;
 import com.example.ZZfishing.utils.IdUtil;
@@ -17,11 +18,14 @@ import java.util.Optional;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
+    private final ApplicationEventPublisher publisher;
+    private final ProfileMapper profileMapper;
 
     public ProfileService(
-            ProfileRepository profileRepository,
-            ApplicationEventPublisher publisher) {
+            ProfileRepository profileRepository, ApplicationEventPublisher publisher, ProfileMapper profileMapper) {
                 this.profileRepository = profileRepository;
+                this.publisher = publisher;
+                this.profileMapper = profileMapper;
     }
 
     public Optional<Profile> get(long id) {
@@ -34,15 +38,6 @@ public class ProfileService {
     }
 
     public Profile addNewProfile(Profile profile) {
-        Optional<Profile> profileOptional = profileRepository
-                .findProfileByEmail(profile.getEmail());
-        if (profileOptional.isPresent()) {
-            throw new ProfileEmailTakenException(profile.getEmail());
-        }
-        return profileRepository.save(profile);
-    }
-
-    public Profile addNewProfileDto(Profile profile) {
         Optional<Profile> profileOptional = profileRepository
                 .findProfileByEmail(profile.getEmail());
         if (profileOptional.isPresent()) {
