@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/fish")
-public class FishController {
+public class FishController implements IFishController {
 
     private final FishService fishService;
 
@@ -39,9 +39,9 @@ public class FishController {
             @ApiResponse(responseCode = "200", description = "Fish fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch fish due to internal error")
     })
-    public ResponseEntity<Fish> fetchFishById(
+    public ResponseEntity<Fish> getFishById(
             @PathVariable("fishId") Long fishId) {
-                Fish fishDB = fishService.fetchFishById(fishId);
+                Fish fishDB = fishService.getFishById(fishId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(fishDB, httpStatus);
     }

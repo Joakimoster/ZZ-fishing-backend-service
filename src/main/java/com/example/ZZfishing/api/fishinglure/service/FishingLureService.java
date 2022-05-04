@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class FishingLureService {
+public class FishingLureService implements IFishingLureService {
 
     private final FishingLureRepository fishingLureRepository;
     private final ApplicationEventPublisher eventPublisher;
@@ -27,14 +27,17 @@ public class FishingLureService {
                 this.mapper = mapper;
     }
 
+    @Override
     public List<FishingLure> getFishLures() {
         return fishingLureRepository.findAll();
     }
 
+    @Override
     public FishingLure addNewFishLure(FishingLure fishingLure) {
         return fishingLureRepository.save(fishingLure);
     }
 
+    @Override
     public void deleteFishingLure(Long fishingLureId) {
         boolean exists = fishingLureRepository.existsById(fishingLureId);
 
@@ -44,6 +47,7 @@ public class FishingLureService {
         fishingLureRepository.deleteById(fishingLureId);
     }
 
+    @Override
     public FishingLure updateFishingLure(Long fishingLureId, FishingLure fishingLure) {
         FishingLure fishingLureDB = fishingLureRepository.findById(fishingLureId).
                 orElseThrow(() -> new FishingLureNotFoundException(fishingLureId));
@@ -65,12 +69,13 @@ public class FishingLureService {
         return fishingLureRepository.save(fishingLureDB);
     }
 
-    public FishingLure fetchFishingLureById(Long fishingLureId) {
-        //IdUtil.assertId(fishingLureId);
+    @Override
+    public FishingLure getFishingLureById(Long fishingLureId) {
         return fishingLureRepository.findById(fishingLureId).orElseThrow(
                 () -> new FishingLureNotFoundException(fishingLureId));
     }
 
+    @Override
     public FishingLureDto getFishingLureDto(long id) {
         if (fishingLureRepository.existsById(id)) {
             return mapper.toFishingLureDto(fishingLureRepository.getById(id));

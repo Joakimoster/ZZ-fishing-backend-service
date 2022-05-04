@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class ProfileService {
+public class ProfileService implements IProfileService {
 
     private final ProfileRepository profileRepository;
     private final ApplicationEventPublisher publisher;
@@ -28,15 +28,18 @@ public class ProfileService {
                 this.profileMapper = profileMapper;
     }
 
+    @Override
     public Optional<Profile> get(long id) {
         IdUtil.assertId(id);
         return profileRepository.findById(id);
     }
 
+    @Override
     public List<Profile> getProfiles() {
         return profileRepository.findAll();
     }
 
+    @Override
     public Profile addNewProfile(Profile profile) {
         Optional<Profile> profileOptional = profileRepository
                 .findProfileByEmail(profile.getEmail());
@@ -46,6 +49,7 @@ public class ProfileService {
         return profileRepository.save(profile);
     }
 
+    @Override
     public void deleteProfile(Long profileId) {
         boolean exists = profileRepository.existsById(profileId);
 
@@ -54,6 +58,7 @@ public class ProfileService {
         }
         profileRepository.deleteById(profileId);
     }
+    @Override
     public Profile updateProfile(Long profileId, Profile profile) {
         Profile profileDB = profileRepository.findById(profileId).orElseThrow(
                 () -> new ProfileNotFoundException(profileId));
@@ -72,13 +77,15 @@ public class ProfileService {
         return profileRepository.save(profileDB);
     }
 
-    public Profile fetchProfileById(Long profileId) {
+    @Override
+    public Profile getProfileById(Long profileId) {
         IdUtil.assertId(profileId);
         return profileRepository.findById(profileId).orElseThrow(
                 () -> new ProfileNotFoundException(profileId));
     }
 
-    protected Profile getProfileOrThrow(long profileId)
+    @Override
+    public Profile getProfileOrThrow(long profileId)
         throws ProfileNotFoundException {
             return profileRepository.findById(profileId)
                     .orElseThrow(() -> new ProfileNotFoundException(profileId));

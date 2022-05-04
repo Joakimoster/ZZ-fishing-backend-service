@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
 
@@ -22,14 +22,17 @@ public class UserService {
                 this.userRepository = userRepository;
     }
 
+    @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public User addNewUser(User user) {
         return userRepository.save(user);
     }
 
+    @Override
     public void deleteUser(Long userId) {
         boolean exists = userRepository.existsById(userId);
 
@@ -39,6 +42,7 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    @Override
     public User updateUser(Long userId, User user) {
         User userDB = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
@@ -62,7 +66,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User fetchUserById(Long userId) {
+    @Override
+    public User getUserById(Long userId) {
         IdUtil.assertId(userId);
         return userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(userId));

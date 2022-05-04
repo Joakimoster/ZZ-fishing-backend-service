@@ -68,7 +68,7 @@ class FishServiceTest {
         when(fishRepository.findById(VALID_ID))
                 .thenReturn(Optional.of(fish));
 
-        assertThat(underTest.fetchFishById(VALID_ID)).isEqualTo(fish);
+        assertThat(underTest.getFishById(VALID_ID)).isEqualTo(fish);
     }
 
     @Test
@@ -133,7 +133,7 @@ class FishServiceTest {
     @Test
     void canFindFishByIdOrThrowFishNotFoundException() {
         assertThatExceptionOfType(FishNotFoundException.class).isThrownBy(
-                () -> underTest.fetchFishById(INVALID_ID))
+                () -> underTest.getFishById(INVALID_ID))
                 .withMessage("Unable to find fish by id: " + INVALID_ID);
     }
 

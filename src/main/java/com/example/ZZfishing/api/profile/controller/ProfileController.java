@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/profile")
-public class ProfileController {
+public class ProfileController implements IProfileController{
 
     private final ProfileService profileService;
     private final ProfileMapper profileMapper;
@@ -43,8 +43,8 @@ public class ProfileController {
             @ApiResponse(responseCode = "200", description = "ProfileDto fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch profileDto due to internal error")
     })
-    public ResponseEntity<ProfileDto> getProfileByDto(@PathVariable("profileId") Long profileId) {
-        Profile profile = profileService.fetchProfileById(profileId);
+    public ResponseEntity<ProfileDto> getProfileDto(@PathVariable("profileId") Long profileId) {
+        Profile profile = profileService.getProfileById(profileId);
 
         ProfileDto postResponse = profileMapper.toProfileDto(profile);
         return ResponseEntity.ok().body(postResponse);
@@ -56,9 +56,9 @@ public class ProfileController {
             @ApiResponse(responseCode = "200", description = "Profile fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch profile due to internal error")
     })
-    public ResponseEntity<Profile> fetchProfileById(
+    public ResponseEntity<Profile> getProfileById(
             @PathVariable("profileId") Long profileId) {
-                Profile profileDB = profileService.fetchProfileById(profileId);
+                Profile profileDB = profileService.getProfileById(profileId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(profileDB, httpStatus);
     }
@@ -81,7 +81,7 @@ public class ProfileController {
             @ApiResponse(responseCode = "200", description = "New profileDto was successfully created"),
             @ApiResponse(responseCode = "500", description = "Unable to create a new profileDto due to internal error")
     })
-    public ResponseEntity<ProfileDto> registerNewDtoProfile(@RequestBody ProfileDto profileDto) {
+    public ResponseEntity<ProfileDto> registerNewProfileDto(@RequestBody ProfileDto profileDto) {
         Profile profileRequest = new Profile();
         profileMapper.toProfileDto(profileRequest);
 

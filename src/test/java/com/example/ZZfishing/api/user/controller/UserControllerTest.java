@@ -56,7 +56,7 @@ class UserControllerTest {
     @Test
     void canGetUserById() throws Exception {
         User user = getUser(VALID_ID);
-        when(userService.fetchUserById(1L))
+        when(userService.getUserById(1L))
                 .thenReturn(user);
         mockMvc.perform(
                 get("/api/v1/user/{id}", 1L))
@@ -98,7 +98,7 @@ class UserControllerTest {
     @Test
     void canDeleteUser() throws Exception {
         User user = getUser(VALID_ID);
-        when(userService.fetchUserById(VALID_ID))
+        when(userService.getUserById(VALID_ID))
                 .thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/user/{id}", 1L))
                 .andExpect(status().isOk());

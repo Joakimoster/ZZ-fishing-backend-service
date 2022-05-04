@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "api/v1/fishingLure")
-public class FishingLureController {
+public class FishingLureController implements IFishingLureController {
 
     private final FishingLureService fishingLureService;
     private final FishingLureMapper mapper;
@@ -43,9 +43,9 @@ public class FishingLureController {
             @ApiResponse(responseCode = "200", description = "Fishing lure fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch fishing lure due to internal error")
     })
-    public ResponseEntity<FishingLure> fetchFishingLureById(
+    public ResponseEntity<FishingLure> getFishingLureById(
             @PathVariable ("fishingLureId") Long fishingLureId) {
-                FishingLure fishingLureDB = fishingLureService.fetchFishingLureById(fishingLureId);
+                FishingLure fishingLureDB = fishingLureService.getFishingLureById(fishingLureId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(fishingLureDB, httpStatus);
     }
@@ -56,7 +56,7 @@ public class FishingLureController {
             @ApiResponse(responseCode = "200", description = "New fishing lure was successfully created"),
             @ApiResponse(responseCode = "500", description = "Unable to create a new fishing lure due to internal error")
     })
-    public ResponseEntity<FishingLure> registerNewFishLure(@RequestBody FishingLure fishingLure) {
+    public ResponseEntity<FishingLure> registerNewFishingLure(@RequestBody FishingLure fishingLure) {
         FishingLure returnFishingLure = fishingLureService.addNewFishLure(fishingLure);
         HttpStatus httpStatus = HttpStatus.CREATED;
         return new ResponseEntity<>(returnFishingLure, httpStatus);
@@ -68,7 +68,7 @@ public class FishingLureController {
             @ApiResponse(responseCode = "200", description = "Fishing lure was successfully deleted"),
             @ApiResponse(responseCode = "500", description = "Unable to delete the fishing lure due to internal error")
     })
-    public ResponseEntity<FishingLure> deleteFishLure(
+    public ResponseEntity<FishingLure> deleteFishingLure(
             @PathVariable ("fishingLureId") Long fishingLureId) {
                 fishingLureService.deleteFishingLure(fishingLureId);
                 HttpStatus httpStatus = HttpStatus.OK;

@@ -57,7 +57,7 @@ class ProfileServiceTest {
                 Assertions.assertThrows(
                         IdNotValidException.class,
                         () -> {
-                            profileService.fetchProfileById(INVALID_ID);
+                            profileService.getProfileById(INVALID_ID);
                         });
         Assertions.assertEquals(HttpStatus.NOT_ACCEPTABLE, thrown.getStatus());
         Assertions.assertEquals(
