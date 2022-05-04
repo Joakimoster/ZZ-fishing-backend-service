@@ -73,7 +73,7 @@ class ProfileControllerTest {
         Profile profile = getProfile(VALID_ID);
         when(repository.findById(VALID_ID))
                 .thenReturn(Optional.of(profile));
-        assertEquals(profile, profileService.fetchProfileById(VALID_ID));
+        assertEquals(profile, profileService.getProfileById(VALID_ID));
     }
 
     @Test
@@ -82,7 +82,7 @@ class ProfileControllerTest {
                 Assertions.assertThrows(
                         IdNotValidException.class,
                         () -> {
-                            profileService.fetchProfileById(INVALID_ID);
+                            profileService.getProfileById(INVALID_ID);
                         });
         Assertions.assertEquals(HttpStatus.NOT_ACCEPTABLE, thrown.getStatus());
         Assertions.assertEquals(

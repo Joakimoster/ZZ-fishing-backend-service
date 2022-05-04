@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/catching")
-public class CatchingController {
+public class CatchingController implements ICatchingController{
 
     private final CatchingService catchingService;
 
@@ -39,9 +39,9 @@ public class CatchingController {
             @ApiResponse(responseCode = "200", description = "Catching fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch a catching due to internal error")
     })
-    public ResponseEntity<Catching> fetchCatchingById(
+    public ResponseEntity<Catching> getCatchingById(
             @PathVariable("catchingId") Long catchingId) {
-                Catching catchingDB = catchingService.fetchCatchingById(catchingId);
+                Catching catchingDB = catchingService.getCatchingById(catchingId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(catchingDB, httpStatus);
     }

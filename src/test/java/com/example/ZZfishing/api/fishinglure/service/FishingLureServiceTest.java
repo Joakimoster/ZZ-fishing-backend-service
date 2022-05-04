@@ -44,7 +44,7 @@ public class FishingLureServiceTest {
 
         when(repository.findById(VALID_ID))
                 .thenReturn(Optional.of(fishingLure));
-        assertThat(service.fetchFishingLureById(VALID_ID)).isEqualTo(fishingLure);
+        assertThat(service.getFishingLureById(VALID_ID)).isEqualTo(fishingLure);
     }
 
     @Test
@@ -67,13 +67,13 @@ public class FishingLureServiceTest {
         when(repository.findById(VALID_ID))
                 .thenReturn(Optional.of(fishingLure));
         assertThrows(FishingLureNotFoundException.class,
-                () -> service.fetchFishingLureById(INVALID_ID));
+                () -> service.getFishingLureById(INVALID_ID));
     }
 
     @Test
     void canThrowFishingLureNotFoundException() {
         assertThatExceptionOfType(FishingLureNotFoundException.class).isThrownBy(
-                () -> service.fetchFishingLureById(INVALID_ID))
+                () -> service.getFishingLureById(INVALID_ID))
                 .withMessage("Unable to find fishing lure by id: " + INVALID_ID);
     }
 

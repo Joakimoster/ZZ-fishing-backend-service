@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/user")
-public class UserController {
+public class UserController implements IUserController{
 
     private final UserService userService;
 
@@ -39,9 +39,9 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "User fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch user due to internal error")
     })
-    public ResponseEntity<User> fetchUserById(
+    public ResponseEntity<User> getUserById(
             @PathVariable("userId") Long userId) {
-                User userDB = userService.fetchUserById(userId);
+                User userDB = userService.getUserById(userId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(userDB, httpStatus);
     }

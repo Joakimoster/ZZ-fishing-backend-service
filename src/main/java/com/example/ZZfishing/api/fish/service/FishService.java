@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class FishService {
+public class FishService implements IFishService {
 
     private final FishRepository fishRepository;
 
@@ -23,19 +23,23 @@ public class FishService {
                 this.fishRepository = fishRepository;
     }
 
+    @Override
     public Optional<Fish> get(long id) {
         IdUtil.assertId(id);
         return fishRepository.findById(id);
     }
 
+    @Override
     public List<Fish> getFishes() {
         return fishRepository.findAll();
     }
 
+    @Override
     public Fish addNewFish(Fish fish) {
         return fishRepository.save(fish);
     }
 
+    @Override
     public void deleteFishById(Long fishId) {
         Optional<Fish> fish = fishRepository.findById(fishId);
 
@@ -45,6 +49,7 @@ public class FishService {
         fishRepository.deleteById(fishId);
     }
 
+    @Override
     public void deleteFish(Long fishId) {
         boolean exists = fishRepository.existsById(fishId);
 
@@ -54,6 +59,7 @@ public class FishService {
         fishRepository.deleteById(fishId);
     }
 
+    @Override
     public Fish updateFish(Long fishId, Fish fish) {
         Fish fishDB = fishRepository.findById(fishId).orElseThrow(
                 () -> new FishNotFoundException(fishId));
@@ -71,12 +77,13 @@ public class FishService {
         return fishRepository.save(fishDB);
     }
 
-    public Fish fetchFishById(Long fishId) {
-        //IdUtil.assertId(fishId);
+    @Override
+    public Fish getFishById(Long fishId) {
         return fishRepository.findById(fishId).orElseThrow(
                 () -> new FishNotFoundException(fishId));
     }
 
+    @Override
     public Fish getFishOrThrow(long fishId)
         throws FishNotFoundException {
             return fishRepository.findById(fishId)

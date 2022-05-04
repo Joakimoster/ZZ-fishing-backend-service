@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/history")
-public class HistoryController {
+public class HistoryController implements IHistoryController{
 
     private final HistoryService historyService;
 
@@ -39,9 +39,9 @@ public class HistoryController {
             @ApiResponse(responseCode = "200", description = "History fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch history due to internal error")
     })
-    public ResponseEntity<History> fetchHistoryById(
+    public ResponseEntity<History> getHistoryById(
             @PathVariable("historyId") Long historyId) {
-                History historyDB = historyService.fetchHistoryById(historyId);
+                History historyDB = historyService.getHistoryById(historyId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(historyDB, httpStatus);
     }

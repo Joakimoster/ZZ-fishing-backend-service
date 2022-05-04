@@ -1,9 +1,7 @@
 package com.example.ZZfishing.api.fish.controller;
 
-import com.example.ZZfishing.api.fish.exception.FishNotFoundException;
 import com.example.ZZfishing.api.fish.repository.entity.Fish;
 import com.example.ZZfishing.api.fish.service.FishService;
-import com.example.ZZfishing.model.exception.NotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,7 +76,7 @@ class FishControllerTest {
     void canGetFishById() throws Exception {
         Fish fish = getFish(VALID_ID);
 
-        given(fishService.fetchFishById(VALID_ID)).willReturn(fish);
+        given(fishService.getFishById(VALID_ID)).willReturn(fish);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fish/{id}", VALID_ID))
                 .andExpect(status().isOk()).andReturn();

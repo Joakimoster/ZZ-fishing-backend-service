@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class CatchingService {
+public class CatchingService implements ICatchingService {
 
     private final CatchingRepository catchingRepository;
 
@@ -21,14 +21,17 @@ public class CatchingService {
                 this.catchingRepository = catchingRepository;
     }
 
+    @Override
     public List<Catching> getCatchings() {
         return catchingRepository.findAll();
     }
 
+    @Override
     public Catching addNewCatching(Catching catching) {
         return catchingRepository.save(catching);
     }
 
+    @Override
     public void deleteCatching(Long catchingId) {
         boolean exists = catchingRepository.existsById(catchingId);
 
@@ -38,6 +41,7 @@ public class CatchingService {
         catchingRepository.deleteById(catchingId);
     }
 
+    @Override
     public Catching updateCatching(Long catchingId, Catching catching) {
         Catching catchingDB = catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
@@ -49,7 +53,8 @@ public class CatchingService {
         return catchingRepository.save(catchingDB);
     }
 
-    public Catching fetchCatchingById(Long catchingId) {
+    @Override
+    public Catching getCatchingById(Long catchingId) {
         IdUtil.assertId(catchingId);
         return catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));

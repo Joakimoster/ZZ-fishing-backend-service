@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class HistoryService {
+public class HistoryService implements IHistoryService {
 
     private final HistoryRepository historyRepository;
 
@@ -23,14 +23,17 @@ public class HistoryService {
                 this.historyRepository = historyRepository;
     }
 
+    @Override
     public List<History> getHistories() {
         return historyRepository.findAll();
     }
 
+    @Override
     public History addNewHistory(History history) {
         return historyRepository.save(history);
     }
 
+    @Override
     public void deleteHistory(Long historyId) {
         boolean exists = historyRepository.existsById(historyId);
 
@@ -40,6 +43,7 @@ public class HistoryService {
         historyRepository.deleteById(historyId);
     }
 
+    @Override
     public History updateHistory(Long historyId, History history) {
         History historyDB = historyRepository.findById(historyId).orElseThrow(
                 () -> new ProfileNotFoundException(historyId));
@@ -53,7 +57,8 @@ public class HistoryService {
         return historyRepository.save(historyDB);
     }
 
-    public History fetchHistoryById(Long historyId) {
+    @Override
+    public History getHistoryById(Long historyId) {
         IdUtil.assertId(historyId);
         return historyRepository.findById(historyId).orElseThrow(
                 () -> new HistoryNotFoundException(historyId));
