@@ -1,16 +1,19 @@
 package com.example.ZZfishing.api.catching.repository.entity;
 
 import com.example.ZZfishing.api.history.repository.entity.History;
+import com.example.ZZfishing.utils.IdEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table
-public class Catching {
+@JsonIgnoreProperties( {"id"} )
+public class Catching extends IdEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
     private String fish;
 
     @ManyToOne
@@ -20,17 +23,8 @@ public class Catching {
     public Catching() {
     }
 
-    public Catching(Long id, String fish) {
-        Id = id;
+    public Catching(String fish) {
         this.fish = fish;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getFish() {
@@ -52,7 +46,6 @@ public class Catching {
     @Override
     public String toString() {
         return "Catching{" +
-                "Id=" + Id +
                 ", fish='" + fish + '\'' +
                 '}';
     }

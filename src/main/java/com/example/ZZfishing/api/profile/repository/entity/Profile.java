@@ -1,17 +1,16 @@
 package com.example.ZZfishing.api.profile.repository.entity;
 
 import com.example.ZZfishing.api.user.repository.entity.User;
+import com.example.ZZfishing.utils.IdEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Profile {
+@JsonIgnoreProperties( {"id"} )
+public class Profile extends IdEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long Id;
     private String name;
     private String email;
     private Integer age;
@@ -22,19 +21,10 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(Long id, String name, String email, Integer age) {
-        Id = id;
+    public Profile(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
     }
 
     public String getName() {
@@ -68,7 +58,6 @@ public class Profile {
     @Override
     public String toString() {
         return "Profile{" +
-                "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
