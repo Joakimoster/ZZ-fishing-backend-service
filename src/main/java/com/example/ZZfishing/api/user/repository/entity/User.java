@@ -1,42 +1,33 @@
 package com.example.ZZfishing.api.user.repository.entity;
 
 import com.example.ZZfishing.api.profile.repository.entity.Profile;
+import com.example.ZZfishing.utils.IdEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "\"User\"")
-public class User {
+@JsonIgnoreProperties( {"id"} )
+public class User extends IdEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long Id;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
 
-    @OneToOne(optional = false,cascade= CascadeType.ALL)
+    @OneToOne(optional = false, cascade= CascadeType.ALL)
     private Profile profile;
 
     public User() {
     }
 
-    public User(Long id, String password, String firstName, String lastName, String email) {
-        Id = id;
+    public User(String password, String firstName, String lastName, String email) {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getPassword() {
@@ -82,7 +73,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

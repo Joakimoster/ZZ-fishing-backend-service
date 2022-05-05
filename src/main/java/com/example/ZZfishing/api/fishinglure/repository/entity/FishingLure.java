@@ -1,14 +1,15 @@
 package com.example.ZZfishing.api.fishinglure.repository.entity;
 
+import com.example.ZZfishing.utils.IdEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table
-public class FishingLure {
+@JsonIgnoreProperties( {"id"} )
+public class FishingLure extends IdEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
     private String type;
     private Integer length;
     private Integer weight;
@@ -17,20 +18,11 @@ public class FishingLure {
     public FishingLure() {
     }
 
-    public FishingLure(Long id, String type, Integer length, Integer weight, String label) {
-        Id = id;
+    public FishingLure(String type, Integer length, Integer weight, String label) {
         this.type = type;
         this.length = length;
         this.weight = weight;
         this.label = label;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
     }
 
     public String getType() {
@@ -68,7 +60,6 @@ public class FishingLure {
     @Override
     public String toString() {
         return "FishingLure{" +
-                "Id=" + Id +
                 ", type='" + type + '\'' +
                 ", length=" + length +
                 ", weight=" + weight +

@@ -97,8 +97,8 @@ public class FishingLureServiceTest {
 
     private List<FishingLure> getFishingLureList() {
         List<FishingLure> list = new ArrayList<>();
-        list.add(new FishingLure(1L, "Perch Fight", 5, 10, "Strong lure"));
-        list.add(new FishingLure(1L, "Salmon High", 3, 12, "Shallow water lure"));
+        list.add(new FishingLure("Perch Fight", 5, 10, "Strong lure"));
+        list.add(new FishingLure("Salmon High", 3, 12, "Shallow water lure"));
         return list;
     }
 }
