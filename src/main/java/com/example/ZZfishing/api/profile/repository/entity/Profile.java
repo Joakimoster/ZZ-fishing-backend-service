@@ -15,6 +15,7 @@ public class Profile extends IdEntity {
     private String lastName;
     private String email;
     private int age;
+    private String country;
 
     @OneToOne(mappedBy = "profile",cascade= CascadeType.ALL)
     private User user;
@@ -22,11 +23,12 @@ public class Profile extends IdEntity {
     public Profile() {
     }
 
-    public Profile(String firstName, String lastName, String email, int age) {
+    public Profile(String firstName, String lastName, String email, int age, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
+        this.country = country;
     }
 
     public String getFirstName() {
@@ -69,9 +71,10 @@ public class Profile extends IdEntity {
     public String toString() {
         return "Profile{" +
                 ", email='" + email + '\'' +
-                ", email='" + firstName + '\'' +
-                ", email='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", country=" + country +
                 '}';
     }
 }
