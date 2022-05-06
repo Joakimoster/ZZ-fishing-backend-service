@@ -11,9 +11,10 @@ import javax.persistence.*;
 @JsonIgnoreProperties( {"id"} )
 public class Profile extends IdEntity {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
-    private Integer age;
+    private int age;
 
     @OneToOne(mappedBy = "profile",cascade= CascadeType.ALL)
     private User user;
@@ -21,18 +22,27 @@ public class Profile extends IdEntity {
     public Profile() {
     }
 
-    public Profile(String name, String email, Integer age) {
-        this.name = name;
+    public Profile(String firstName, String lastName, String email, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -43,11 +53,11 @@ public class Profile extends IdEntity {
         this.email = email;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -58,8 +68,9 @@ public class Profile extends IdEntity {
     @Override
     public String toString() {
         return "Profile{" +
-                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", email='" + firstName + '\'' +
+                ", email='" + lastName + '\'' +
                 ", age=" + age +
                 '}';
     }

@@ -110,7 +110,7 @@ class ProfileServiceTest {
     void canUpdateProfile() {
         //given
         Profile profile = getProfile(VALID_ID);
-        profile.setName("Abu");
+        profile.setFirstName("Abu");
 
         given(repository.findById(VALID_ID))
                 .willReturn(Optional.of(profile));
@@ -137,7 +137,7 @@ class ProfileServiceTest {
         profile.setId(id);
         profile.setAge(20);
         profile.setEmail("Johansson@gmail.com");
-        profile.setName("Alfred");
+        profile.setFirstName("Alfred");
         return profile;
     }
 }

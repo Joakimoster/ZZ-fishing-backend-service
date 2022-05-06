@@ -13,8 +13,6 @@ import javax.persistence.*;
 public class User extends IdEntity {
 
     private String password;
-    private String firstName;
-    private String lastName;
     private String email;
 
     @OneToOne(optional = false, cascade= CascadeType.ALL)
@@ -23,10 +21,8 @@ public class User extends IdEntity {
     public User() {
     }
 
-    public User(String password, String firstName, String lastName, String email) {
+    public User(String password, String email) {
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
     }
 
@@ -36,22 +32,6 @@ public class User extends IdEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -74,8 +54,6 @@ public class User extends IdEntity {
     public String toString() {
         return "User{" +
                 ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

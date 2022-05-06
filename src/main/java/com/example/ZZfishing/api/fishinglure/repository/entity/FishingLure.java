@@ -11,14 +11,14 @@ import javax.persistence.*;
 public class FishingLure extends IdEntity {
 
     private String type;
-    private Integer length;
-    private Integer weight;
+    private int length;
+    private int weight;
     private String label;
 
     public FishingLure() {
     }
 
-    public FishingLure(String type, Integer length, Integer weight, String label) {
+    public FishingLure(String type, int length, int weight, String label) {
         this.type = type;
         this.length = length;
         this.weight = weight;
@@ -33,19 +33,19 @@ public class FishingLure extends IdEntity {
         this.type = type;
     }
 
-    public Integer getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(Integer length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public Integer getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 

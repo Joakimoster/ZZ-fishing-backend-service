@@ -101,7 +101,7 @@ class ProfileControllerTest {
         profile.setId(id);
         profile.setAge(20);
         profile.setEmail("Johansson@gmail.com");
-        profile.setName("Alfred");
+        profile.setFirstName("Alfred");
         return profile;
     }
 }

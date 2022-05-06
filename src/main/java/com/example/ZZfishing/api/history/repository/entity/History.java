@@ -12,7 +12,7 @@ import java.util.List;
 @JsonIgnoreProperties( {"id"} )
 public class History extends IdEntity {
 
-    private Integer age;
+    private int age;
 
     @OneToMany(mappedBy = "history")
     List<Catching> catchings;
@@ -20,15 +20,15 @@ public class History extends IdEntity {
     public History() {
     }
 
-    public History(Integer age) {
+    public History(int age) {
         this.age = age;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
