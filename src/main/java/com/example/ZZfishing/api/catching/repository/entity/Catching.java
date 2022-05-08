@@ -13,8 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table
-@JsonIgnoreProperties( {"id"} )
-public class Catching extends IdEntity {
+public class Catching extends IdEntity{
 
     @CreationTimestamp private Date catchingDate;
     private boolean released;     //May wanna change variable name
@@ -32,6 +31,9 @@ public class Catching extends IdEntity {
     /*@ManyToOne
     @JoinColumn(name = "history_id")
     private History history;*/
+
+    private Date catchDate;
+
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
@@ -117,6 +119,7 @@ public class Catching extends IdEntity {
     @Override
     public String toString() {
         return "Catching{" +
+                "Id=" + Id +
                 ", fish='" + fish + '\'' +
                 '}';
     }

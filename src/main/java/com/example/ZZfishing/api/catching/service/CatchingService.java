@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.catching.service;
 
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.exception.CatchingNotFoundException;
 import com.example.ZZfishing.api.catching.repository.CatchingRepository;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
@@ -42,7 +43,7 @@ public class CatchingService implements ICatchingService {
     }
 
     @Override
-    public Catching updateCatching(Long catchingId, Catching catching) {
+    public Catching updateCatching(Long catchingId, CatchingUpdateDto updatedCatching) {
         Catching catchingDB = catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
 
@@ -50,6 +51,8 @@ public class CatchingService implements ICatchingService {
                 !"".equalsIgnoreCase(catching.getFish())) {
                 catchingDB.setFish(catching.getFish());
         }*/
+
+        updateCatchingFields(catchingDB,updatedCatching);
         return catchingRepository.save(catchingDB);
     }
 
@@ -58,5 +61,11 @@ public class CatchingService implements ICatchingService {
         IdUtil.assertId(catchingId);
         return catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
+    }
+
+    public void updateCatchingFields(Catching catching, CatchingUpdateDto updateCatching) {
+        catching.setCatchDate(updateCatching.getCatchDate());
+        catching.setFish(updateCatching.getFish());
+        catching.setWeather(updateCatching.getWeather());
     }
 }

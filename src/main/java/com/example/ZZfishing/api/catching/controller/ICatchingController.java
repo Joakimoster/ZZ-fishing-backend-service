@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.catching.controller;
 
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import org.springframework.http.ResponseEntity;
 
@@ -14,5 +15,5 @@ public interface ICatchingController {
 
     ResponseEntity<Catching> deleteCatching(Long id);
 
-    ResponseEntity<Catching> updateCatching(Long id, Catching catching);
+    ResponseEntity<Catching> updateCatching(Long id, CatchingUpdateDto catching);
 }

@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.catching.controller;
 
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.service.CatchingService;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import io.swagger.v3.oas.annotations.Operation;
@@ -79,7 +80,7 @@ public class CatchingController implements ICatchingController{
     })
     public ResponseEntity<Catching> updateCatching(
             @PathVariable("catchingId") Long catchingId,
-            @RequestBody Catching catching) {
+            @RequestBody CatchingUpdateDto catching) {
                 Catching returnCatching = catchingService.updateCatching(catchingId, catching);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(returnCatching, httpStatus);
