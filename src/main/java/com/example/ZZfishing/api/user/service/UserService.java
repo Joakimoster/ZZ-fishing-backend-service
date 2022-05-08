@@ -47,14 +47,6 @@ public class UserService implements IUserService {
         User userDB = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
-        if (Objects.nonNull(user.getFirstName()) &&
-                !"".equalsIgnoreCase(user.getFirstName())) {
-                userDB.setFirstName(user.getFirstName());
-        }
-        if (Objects.nonNull(user.getLastName()) &&
-                !"".equalsIgnoreCase(user.getLastName())) {
-                userDB.setLastName(user.getLastName());
-        }
         if (Objects.nonNull(user.getPassword()) &&
                 !"".equalsIgnoreCase(user.getPassword())) {
                 userDB.setPassword(user.getPassword());

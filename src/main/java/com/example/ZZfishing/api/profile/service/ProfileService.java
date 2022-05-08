@@ -63,9 +63,9 @@ public class ProfileService implements IProfileService {
         Profile profileDB = profileRepository.findById(profileId).orElseThrow(
                 () -> new ProfileNotFoundException(profileId));
 
-        if (Objects.nonNull(profile.getName()) &&
-                !"".equalsIgnoreCase(profile.getName())) {
-                profileDB.setName(profile.getName());
+        if (Objects.nonNull(profile.getFirstName()) &&
+                !"".equalsIgnoreCase(profile.getFirstName())) {
+                profileDB.setFirstName(profile.getFirstName());
         }
         if (Objects.nonNull(profile.getEmail()) &&
                 !"".equalsIgnoreCase(profile.getEmail())) {
