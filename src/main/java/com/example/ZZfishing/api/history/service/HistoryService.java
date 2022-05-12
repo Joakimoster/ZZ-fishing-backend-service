@@ -51,9 +51,9 @@ public class HistoryService implements IHistoryService {
         if (Objects.nonNull(history.getAge())) {
             historyDB.setAge(history.getAge());
         }
-        if (Objects.nonNull(history.getCatchings())) {
+        /*if (Objects.nonNull(history.getCatchings())) {
             historyDB.setCatchings(history.getCatchings());
-        }
+        }*/
         return historyRepository.save(historyDB);
     }
 

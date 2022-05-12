@@ -65,7 +65,7 @@ public class FishService implements IFishService {
                 () -> new FishNotFoundException(fishId));
 
         if (Objects.nonNull(fish.getFishSpecies()) &&
-                !"".equalsIgnoreCase(fish.getFishSpecies())) {
+                !"".equalsIgnoreCase(fish.getFishSpecies().name())) {
                 fishDB.setFishSpecies(fish.getFishSpecies());
         }
         if (fish.getLength() != 0) {

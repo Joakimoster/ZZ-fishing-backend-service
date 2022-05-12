@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.fishinglure.repository.entity;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.utils.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,14 +16,18 @@ public class FishingLure extends IdEntity {
     private int weight;
     private String label;
 
+    @OneToOne(mappedBy = "fishingLure", cascade = CascadeType.ALL)
+    private Catching catching;
+
     public FishingLure() {
     }
 
-    public FishingLure(String type, int length, int weight, String label) {
+    public FishingLure(String type, int length, int weight, String label, Catching catching) {
         this.type = type;
         this.length = length;
         this.weight = weight;
         this.label = label;
+        this.catching = catching;
     }
 
     public String getType() {
@@ -55,6 +60,14 @@ public class FishingLure extends IdEntity {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public Catching getCatching() {
+        return catching;
+    }
+
+    public void setCatching(Catching catching) {
+        this.catching = catching;
     }
 
     @Override

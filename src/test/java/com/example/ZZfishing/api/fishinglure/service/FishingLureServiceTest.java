@@ -1,5 +1,6 @@
 package com.example.ZZfishing.api.fishinglure.service;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.api.fishinglure.controller.dto.FishingLureDto;
 import com.example.ZZfishing.api.fishinglure.exception.FishingLureNotFoundException;
 import com.example.ZZfishing.api.fishinglure.mapper.FishingLureMapper;
@@ -97,8 +98,8 @@ public class FishingLureServiceTest {
 
     private List<FishingLure> getFishingLureList() {
         List<FishingLure> list = new ArrayList<>();
-        list.add(new FishingLure("Perch Fight", 5, 10, "Strong lure"));
-        list.add(new FishingLure("Salmon High", 3, 12, "Shallow water lure"));
+        list.add(new FishingLure("Perch Fight", 5, 10, "Strong lure", new Catching()));
+        list.add(new FishingLure("Salmon High", 3, 12, "Shallow water lure", new Catching()));
         return list;
     }
 }

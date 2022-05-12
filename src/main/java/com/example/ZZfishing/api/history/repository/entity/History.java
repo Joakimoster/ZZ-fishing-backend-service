@@ -14,8 +14,8 @@ public class History extends IdEntity {
 
     private int age;
 
-    @OneToMany(mappedBy = "history")
-    List<Catching> catchings;
+    //@OneToMany(mappedBy = "history")
+    //List<Catching> catchings;
 
     public History() {
     }
@@ -32,13 +32,13 @@ public class History extends IdEntity {
         this.age = age;
     }
 
-    public List<Catching> getCatchings() {
+    /*public List<Catching> getCatchings() {
         return catchings;
     }
 
     public void setCatchings(List<Catching> catchings) {
         this.catchings = catchings;
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -46,10 +46,10 @@ public class CatchingService implements ICatchingService {
         Catching catchingDB = catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
 
-        if (Objects.nonNull(catching.getFish()) &&
+        /*if (Objects.nonNull(catching.getFish()) &&
                 !"".equalsIgnoreCase(catching.getFish())) {
                 catchingDB.setFish(catching.getFish());
-        }
+        }*/
         return catchingRepository.save(catchingDB);
     }
 

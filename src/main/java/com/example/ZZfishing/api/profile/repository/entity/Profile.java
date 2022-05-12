@@ -1,10 +1,12 @@
 package com.example.ZZfishing.api.profile.repository.entity;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.api.user.repository.entity.User;
 import com.example.ZZfishing.utils.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,6 +18,9 @@ public class Profile extends IdEntity {
     private String email;
     private int age;
     private String country;
+
+    @OneToMany(mappedBy = "profile")
+    private List<Catching> catchings;
 
     @OneToOne(mappedBy = "profile",cascade= CascadeType.ALL)
     private User user;
@@ -66,6 +71,22 @@ public class Profile extends IdEntity {
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public List<Catching> getCatchings() {
+        return catchings;
+    }
+
+    public void setCatchings(List<Catching> catchings) {
+        this.catchings = catchings;
+    }
 
     @Override
     public String toString() {
