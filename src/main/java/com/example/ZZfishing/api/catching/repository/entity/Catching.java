@@ -32,8 +32,6 @@ public class Catching extends IdEntity{
     @JoinColumn(name = "history_id")
     private History history;*/
 
-    private Date catchDate;
-
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
@@ -51,7 +49,6 @@ public class Catching extends IdEntity{
         this.fish = fish;
         this.profile = profile;
     }
-
     public Fish getFish() {
         return fish;
     }
