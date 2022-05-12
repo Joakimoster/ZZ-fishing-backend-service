@@ -7,20 +7,20 @@ This repo includes a Java Spring boot application which serves as a backend-api 
 React Native will serve as front-end for this application and will be integrated soon.
 
 ## Technologies
-Java 17
-PostgreSQL
-Swagger-UI
+* Java 17
+* PostgreSQL
+* Swagger-UI
 
 
 ## Authors and acknowledgment
-Joakim Österberg
-Alexander Idemark
-Ante Hellgren
+* Joakim Österberg
+* Alexander Idemark
+* Ante Hellgren
 
 ## Project status
 This README file will be updated on the fly due to new development into the application. 
-  The current state of the application (2022-05-12):
-    -Relationships between entities under progress.
-    -Spring security to be added.
-    -Back-end deployment into Heroku.
-    -Front-end integration, including dummy data.
+The current state of the application (2022-05-12):
+* Relationships between entities under progress.
+* Spring security to be added.
+* Back-end deployment into Heroku.
+* Front-end integration, including dummy data.
