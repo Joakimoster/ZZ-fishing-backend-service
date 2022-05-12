@@ -1,9 +1,11 @@
 package com.example.ZZfishing.api.fish.service;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.api.fish.exception.FishNotDeletedException;
 import com.example.ZZfishing.api.fish.exception.FishNotFoundException;
 import com.example.ZZfishing.api.fish.repository.FishRepository;
 import com.example.ZZfishing.api.fish.repository.entity.Fish;
+import com.example.ZZfishing.api.fish.repository.enums.FishSpecies;
 import com.example.ZZfishing.model.exception.IdNotValidException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,9 +51,9 @@ class FishServiceTest {
     void setUp() {
         underTest = new FishService(fishRepository, publisher);
         this.fishList = new ArrayList<>();
-        this.fishList.add(new Fish(5, 10, "Salmon"));
-        this.fishList.add(new Fish(2, 4, "Tuna"));
-        this.fishList.add(new Fish(3, 5, "Pike"));
+        this.fishList.add(new Fish(5, 10, FishSpecies.SALMON, new Catching()));
+        this.fishList.add(new Fish(2, 4, FishSpecies.TUNA, new Catching()));
+        this.fishList.add(new Fish(3, 5, FishSpecies.PIKE, new Catching()));
     }
 
     @Test
@@ -117,7 +119,7 @@ class FishServiceTest {
     void canUpdateFishById() {
         //given
         Fish fish = getFish(VALID_ID);
-        fish.setFishSpecies("Tuna");
+        fish.setFishSpecies(FishSpecies.SALMON);
         fish.setLength(11);
         fish.setWeight(20);
 
@@ -182,7 +184,7 @@ class FishServiceTest {
         fish.setId(id);
         fish.setLength(10);
         fish.setWeight(25);
-        fish.setFishSpecies("Salmon");
+        fish.setFishSpecies(FishSpecies.SALMON);
         return fish;
     }
 

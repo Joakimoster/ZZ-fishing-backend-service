@@ -1,6 +1,8 @@
 package com.example.ZZfishing.api.fish.controller;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.api.fish.repository.entity.Fish;
+import com.example.ZZfishing.api.fish.repository.enums.FishSpecies;
 import com.example.ZZfishing.api.fish.service.FishService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
@@ -50,9 +51,9 @@ class FishControllerTest {
     @BeforeEach
     void setUp() {
         this.fishList = new ArrayList<>();
-        this.fishList.add(new Fish(5, 10, "Salmon"));
-        this.fishList.add(new Fish(2, 4, "Tuna"));
-        this.fishList.add(new Fish(3, 5, "Pike"));
+        this.fishList.add(new Fish(5, 10, FishSpecies.SALMON, new Catching()));
+        this.fishList.add(new Fish(2, 4, FishSpecies.TUNA, new Catching()));
+        this.fishList.add(new Fish(3, 5, FishSpecies.PIKE, new Catching()));
     }
 
     @Test
@@ -86,29 +87,6 @@ class FishControllerTest {
 
         assertThat(response).isEqualTo(expectedResponse);
     }
-
-    /*@Test
-    void canGetFishByIdOrThrowFishNotFoundException() throws Exception {
-        when(fishService.fetchFishById(anyLong())).thenThrow(new NotFoundException("Not found"));
-
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fish/{id}", 10L))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status", is("failed")));
-
-        verify(fishService,times(1)).fetchFishById(anyLong());
-    }
-
-    @Test
-    void canFetchFishByIdOrThrowFishNotFoundWithInvalidId() throws Exception {
-        given(fishService.fetchFishById(INVALID_ID)).willThrow(new FishNotFoundException(INVALID_ID));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fish/{id}", INVALID_ID)).andExpect(status().isNotFound());
-    }
-
-    @Test
-    void canThrowFishNotDeletedException() throws Exception {
-        doThrow(new FishNotFoundException(INVALID_ID)).when(fishService).deleteFish(INVALID_ID);
-        this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fish/{id}", INVALID_ID)).andExpect(status().isNotFound());
-    }*/
 
     @Test
     void canSaveNewFish() throws Exception {
@@ -166,7 +144,7 @@ class FishControllerTest {
     private Fish getFish(long id) {
         Fish fish = new Fish();
         fish.setId(VALID_ID);
-        fish.setFishSpecies("Salmon");
+        fish.setFishSpecies(FishSpecies.SALMON);
         fish.setWeight(5);
         fish.setLength(10);
         return fish;

@@ -1,5 +1,7 @@
 package com.example.ZZfishing.api.fish.repository.entity;
 
+import com.example.ZZfishing.api.catching.repository.entity.Catching;
+import com.example.ZZfishing.api.fish.repository.enums.FishSpecies;
 import com.example.ZZfishing.utils.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -12,15 +14,21 @@ public class Fish extends IdEntity {
 
     private int weight;
     private int length;
-    private String fishSpecies;
+
+    @Enumerated(EnumType.STRING)
+    private FishSpecies fishSpecies;
+
+    @OneToOne(mappedBy = "fish", cascade = CascadeType.ALL)
+    private Catching catching;
 
     public Fish() {
     }
 
-    public Fish(int weight, int length, String fishSpecies) {
+    public Fish(int weight, int length, FishSpecies fishSpecies, Catching catching) {
         this.weight = weight;
         this.length = length;
         this.fishSpecies = fishSpecies;
+        this.catching = catching;
     }
 
     public int getWeight() {
@@ -39,12 +47,20 @@ public class Fish extends IdEntity {
         this.length = length;
     }
 
-    public String getFishSpecies() {
+    public FishSpecies getFishSpecies() {
         return fishSpecies;
     }
 
-    public void setFishSpecies(String fishSpecies) {
+    public void setFishSpecies(FishSpecies fishSpecies) {
         this.fishSpecies = fishSpecies;
+    }
+
+    public Catching getCatching() {
+        return catching;
+    }
+
+    public void setCatching(Catching catching) {
+        this.catching = catching;
     }
 
     @Override
