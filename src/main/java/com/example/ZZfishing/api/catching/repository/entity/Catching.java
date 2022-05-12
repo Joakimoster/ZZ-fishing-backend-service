@@ -16,7 +16,7 @@ import java.util.Date;
 public class Catching extends IdEntity{
 
     @CreationTimestamp private Date catchingDate;
-    private boolean released;     //May wanna change variable name
+    private boolean released;
     private String location;
 
     @Enumerated(EnumType.STRING)
@@ -112,4 +112,6 @@ public class Catching extends IdEntity{
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
+
 }

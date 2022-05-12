@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@JsonIgnoreProperties( {"id"} )
+@JsonIgnoreProperties(value = {"catching","id"} )
 public class Fish extends IdEntity {
 
     private int weight;
