@@ -64,8 +64,7 @@ public class CatchingService implements ICatchingService {
     }
 
     public void updateCatchingFields(Catching catching, CatchingUpdateDto updateCatching) {
-        catching.setCatchDate(updateCatching.getCatchDate());
+        catching.setCatchingDate(updateCatching.getCatchDate());
         catching.setFish(updateCatching.getFish());
-        catching.setWeather(updateCatching.getWeather());
     }
 }

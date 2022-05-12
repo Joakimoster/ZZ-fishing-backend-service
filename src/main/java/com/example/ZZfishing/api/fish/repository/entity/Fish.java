@@ -32,14 +32,6 @@ public class Fish extends IdEntity {
         this.catching = catching;
     }
 
-    public Catching getCatching() {
-        return catching;
-    }
-
-    public void setCatching(Catching catching) {
-        this.catching = catching;
-    }
-
     public int getWeight() {
         return weight;
     }

@@ -115,12 +115,4 @@ public class Catching extends IdEntity{
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
-
-    @Override
-    public String toString() {
-        return "Catching{" +
-                "Id=" + Id +
-                ", fish='" + fish + '\'' +
-                '}';
-    }
 }
