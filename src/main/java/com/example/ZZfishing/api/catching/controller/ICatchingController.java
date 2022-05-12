@@ -1,18 +1,21 @@
 package com.example.ZZfishing.api.catching.controller;
 
+import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
+import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ICatchingController {
-    ResponseEntity<List<Catching>> getCatchings();
+    ResponseEntity<List<CatchingReponseDto>> getCatchings();
 
-    ResponseEntity<Catching> getCatchingById(Long id);
+    ResponseEntity<CatchingReponseDto> getCatchingById(Long id);
 
-    ResponseEntity<Catching> registerNewCatching(Catching catching);
+    ResponseEntity<CatchingReponseDto> registerNewCatching(CatchingRequestBodyDto catching);
 
     ResponseEntity<Catching> deleteCatching(Long id);
 
-    ResponseEntity<Catching> updateCatching(Long id, Catching catching);
+    ResponseEntity<Catching> updateCatching(Long id, CatchingUpdateDto catching);
 }

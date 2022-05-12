@@ -1,5 +1,8 @@
 package com.example.ZZfishing.api.catching.controller;
 
+import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
+import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.service.CatchingService;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,8 +30,8 @@ public class CatchingController implements ICatchingController{
             @ApiResponse(responseCode = "200", description = "All catchings are fetched"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch catchings due to internal error")
     })
-    public ResponseEntity<List<Catching>> getCatchings() {
-        List<Catching> catchings = catchingService.getCatchings().stream().toList();
+    public ResponseEntity<List<CatchingReponseDto>> getCatchings() {
+        List<CatchingReponseDto> catchings = catchingService.getCatchings().stream().toList();
         HttpStatus httpStatus = HttpStatus.OK;
         return new ResponseEntity<>(catchings, httpStatus);
     }
@@ -39,9 +42,9 @@ public class CatchingController implements ICatchingController{
             @ApiResponse(responseCode = "200", description = "Catching fetched by id"),
             @ApiResponse(responseCode = "500", description = "Unable to fetch a catching due to internal error")
     })
-    public ResponseEntity<Catching> getCatchingById(
+    public ResponseEntity<CatchingReponseDto> getCatchingById(
             @PathVariable("catchingId") Long catchingId) {
-                Catching catchingDB = catchingService.getCatchingById(catchingId);
+        CatchingReponseDto catchingDB = catchingService.getCatchingById(catchingId);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(catchingDB, httpStatus);
     }
@@ -52,8 +55,8 @@ public class CatchingController implements ICatchingController{
             @ApiResponse(responseCode = "200", description = "New catching was successfully created"),
             @ApiResponse(responseCode = "500", description = "Unable to create a new catching due to internal error")
     })
-    public ResponseEntity<Catching> registerNewCatching(@RequestBody Catching catching) {
-        Catching returnCatching = catchingService.addNewCatching(catching);
+    public ResponseEntity<CatchingReponseDto> registerNewCatching(@RequestBody CatchingRequestBodyDto catching) {
+        CatchingReponseDto returnCatching = catchingService.addNewCatching(catching);
         HttpStatus httpStatus = HttpStatus.CREATED;
         return new ResponseEntity<>(returnCatching, httpStatus);
     }
@@ -79,7 +82,7 @@ public class CatchingController implements ICatchingController{
     })
     public ResponseEntity<Catching> updateCatching(
             @PathVariable("catchingId") Long catchingId,
-            @RequestBody Catching catching) {
+            @RequestBody CatchingUpdateDto catching) {
                 Catching returnCatching = catchingService.updateCatching(catchingId, catching);
                 HttpStatus httpStatus = HttpStatus.OK;
                 return new ResponseEntity<>(returnCatching, httpStatus);

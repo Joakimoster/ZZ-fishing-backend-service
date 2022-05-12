@@ -2,6 +2,7 @@ package com.example.ZZfishing.api.fish.repository.entity;
 
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.api.fish.repository.enums.FishSpecies;
+
 import com.example.ZZfishing.utils.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@JsonIgnoreProperties( {"id"} )
+@JsonIgnoreProperties(value = {"catching","id"} )
 public class Fish extends IdEntity {
 
     private int weight;
@@ -18,7 +19,7 @@ public class Fish extends IdEntity {
     @Enumerated(EnumType.STRING)
     private FishSpecies fishSpecies;
 
-    @OneToOne(mappedBy = "fish", cascade = CascadeType.ALL)
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
     private Catching catching;
 
     public Fish() {

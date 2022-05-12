@@ -1,17 +1,20 @@
 package com.example.ZZfishing.api.catching.service;
 
+import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
+import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 
 import java.util.List;
 
 public interface ICatchingService {
-    List<Catching> getCatchings();
+    List<CatchingReponseDto> getCatchings();
 
-    Catching addNewCatching(Catching catching);
+    CatchingReponseDto addNewCatching(CatchingRequestBodyDto catching);
 
     void deleteCatching(Long catchingId);
 
-    Catching updateCatching(Long catchingId, Catching catching);
+    Catching updateCatching(Long catchingId, CatchingUpdateDto catching);
 
-    Catching getCatchingById(Long catchingId);
+    CatchingReponseDto getCatchingById(Long catchingId);
 }

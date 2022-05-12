@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@JsonIgnoreProperties( {"id"} )
+@JsonIgnoreProperties(value = {"catching","id"} )
 public class FishingLure extends IdEntity {
 
     private String type;

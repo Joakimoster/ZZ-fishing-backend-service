@@ -1,6 +1,10 @@
 package com.example.ZZfishing.api.catching.service;
 
+import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
+import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.exception.CatchingNotFoundException;
+import com.example.ZZfishing.api.catching.mapper.CatchingMapper;
 import com.example.ZZfishing.api.catching.repository.CatchingRepository;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import com.example.ZZfishing.utils.IdUtil;
@@ -8,27 +12,28 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class CatchingService implements ICatchingService {
 
     private final CatchingRepository catchingRepository;
+    private final CatchingMapper mapper;
 
     public CatchingService(
             CatchingRepository catchingRepository,
-            ApplicationEventPublisher publisher) {
+            ApplicationEventPublisher publisher, CatchingMapper mapper) {
                 this.catchingRepository = catchingRepository;
+        this.mapper = mapper;
     }
 
     @Override
-    public List<Catching> getCatchings() {
-        return catchingRepository.findAll();
+    public List<CatchingReponseDto> getCatchings() {
+        return mapper.catchingToResponseCatchings(catchingRepository.findAll());
     }
 
     @Override
-    public Catching addNewCatching(Catching catching) {
-        return catchingRepository.save(catching);
+    public CatchingReponseDto addNewCatching(CatchingRequestBodyDto catching) {
+        return mapper.catchingToResponseCatching(catchingRepository.save(mapper.requestBodyDtoToCatching(catching)));
     }
 
     @Override
@@ -42,7 +47,7 @@ public class CatchingService implements ICatchingService {
     }
 
     @Override
-    public Catching updateCatching(Long catchingId, Catching catching) {
+    public Catching updateCatching(Long catchingId, CatchingUpdateDto updatedCatching) {
         Catching catchingDB = catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId));
 
@@ -50,13 +55,20 @@ public class CatchingService implements ICatchingService {
                 !"".equalsIgnoreCase(catching.getFish())) {
                 catchingDB.setFish(catching.getFish());
         }*/
+
+        updateCatchingFields(catchingDB,updatedCatching);
         return catchingRepository.save(catchingDB);
     }
 
     @Override
-    public Catching getCatchingById(Long catchingId) {
+    public CatchingReponseDto getCatchingById(Long catchingId) {
         IdUtil.assertId(catchingId);
-        return catchingRepository.findById(catchingId).orElseThrow(
-                () -> new CatchingNotFoundException(catchingId));
+        return mapper.catchingToResponseCatching(catchingRepository.findById(catchingId).orElseThrow(
+                () -> new CatchingNotFoundException(catchingId)));
+    }
+
+    public void updateCatchingFields(Catching catching, CatchingUpdateDto updateCatching) {
+        catching.setCatchingDate(updateCatching.getCatchDate());
+        catching.setFish(updateCatching.getFish());
     }
 }
