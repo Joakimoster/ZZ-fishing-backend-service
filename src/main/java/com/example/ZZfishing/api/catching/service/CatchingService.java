@@ -1,8 +1,8 @@
 package com.example.ZZfishing.api.catching.service;
 
-import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
-import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
-import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingResponseDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.exception.CatchingNotFoundException;
 import com.example.ZZfishing.api.catching.mapper.CatchingMapper;
 import com.example.ZZfishing.api.catching.repository.CatchingRepository;
@@ -27,12 +27,12 @@ public class CatchingService implements ICatchingService {
     }
 
     @Override
-    public List<CatchingReponseDto> getCatchings() {
+    public List<CatchingResponseDto> getCatchings() {
         return mapper.catchingToResponseCatchings(catchingRepository.findAll());
     }
 
     @Override
-    public CatchingReponseDto addNewCatching(CatchingRequestBodyDto catching) {
+    public CatchingResponseDto addNewCatching(CatchingRequestBodyDto catching) {
         return mapper.catchingToResponseCatching(catchingRepository.save(mapper.requestBodyDtoToCatching(catching)));
     }
 
@@ -61,7 +61,7 @@ public class CatchingService implements ICatchingService {
     }
 
     @Override
-    public CatchingReponseDto getCatchingById(Long catchingId) {
+    public CatchingResponseDto getCatchingById(Long catchingId) {
         IdUtil.assertId(catchingId);
         return mapper.catchingToResponseCatching(catchingRepository.findById(catchingId).orElseThrow(
                 () -> new CatchingNotFoundException(catchingId)));

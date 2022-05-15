@@ -1,8 +1,8 @@
 package com.example.ZZfishing.api.catching.mapper;
 
-import com.example.ZZfishing.api.catching.dto.CatchingReponseDto;
-import com.example.ZZfishing.api.catching.dto.CatchingRequestBodyDto;
-import com.example.ZZfishing.api.catching.dto.CatchingUpdateDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingResponseDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingRequestBodyDto;
+import com.example.ZZfishing.api.catching.repository.entity.dto.CatchingUpdateDto;
 import com.example.ZZfishing.api.catching.repository.entity.Catching;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,16 +17,16 @@ public interface CatchingMapper {
 
     CatchingUpdateDto catchingToUpdateCatching(Catching catching);
 
-    Catching responseCatchingDtoToCatching(CatchingReponseDto dto);
+    Catching responseCatchingDtoToCatching(CatchingResponseDto dto);
 
     @Mapping(source = "fish.id", target = "fishId")
-    CatchingReponseDto catchingToResponseCatching(Catching catching);
+    CatchingResponseDto catchingToResponseCatching(Catching catching);
 
     //@Mapping(source = "fish.id", target = "fishId")
-    List<CatchingReponseDto> catchingToResponseCatchings(List<Catching> catching);
+    List<CatchingResponseDto> catchingToResponseCatchings(List<Catching> catching);
 
     CatchingRequestBodyDto catchingToRequestBodyDto(Catching catching);
 
-    @Mapping(source = "profileId", target = "profile.id")
+    //@Mapping(source = "profileId", target = "profile.id")
     Catching requestBodyDtoToCatching(CatchingRequestBodyDto dto);
 }
