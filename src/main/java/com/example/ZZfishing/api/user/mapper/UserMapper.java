@@ -15,6 +15,6 @@ public interface UserMapper {
 
     UserRequestBodyDto userToRequestBodyDto(User user);
 
-    @Mapping(source = "profileId", target = "profile.id")
+    //@Mapping(source = "profileId", target = "profile.id")
     User requestBodyDtoToUser(UserRequestBodyDto dto);
 }

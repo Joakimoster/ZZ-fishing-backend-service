@@ -2,8 +2,11 @@ package com.example.ZZfishing.api.user.service;
 
 import com.example.ZZfishing.api.user.exception.UserNotDeletedException;
 import com.example.ZZfishing.api.user.exception.UserNotFoundException;
+import com.example.ZZfishing.api.user.mapper.UserMapper;
 import com.example.ZZfishing.api.user.repository.UserRepository;
 import com.example.ZZfishing.api.user.repository.entity.User;
+import com.example.ZZfishing.api.user.repository.entity.dto.UserRequestBodyDto;
+import com.example.ZZfishing.api.user.repository.entity.dto.UserResponseDto;
 import com.example.ZZfishing.utils.IdUtil;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -15,11 +18,13 @@ import java.util.Objects;
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+    private final UserMapper mapper;
 
     public UserService(
             UserRepository userRepository,
-            ApplicationEventPublisher publisher) {
+            ApplicationEventPublisher publisher, UserMapper mapper) {
                 this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -28,8 +33,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User addNewUser(User user) {
-        return userRepository.save(user);
+    public UserResponseDto addNewUser(UserRequestBodyDto user) {
+        return mapper.userToResponseUserDto(userRepository.save(mapper.requestBodyDtoToUser(user)));
     }
 
     @Override

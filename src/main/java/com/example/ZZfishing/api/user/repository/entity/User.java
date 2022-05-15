@@ -15,7 +15,8 @@ public class User extends IdEntity {
     private String password;
     private String email;
 
-    @OneToOne(optional = true, cascade= CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     public User() {

@@ -1,10 +1,21 @@
 package com.example.ZZfishing.api.user.repository.entity.dto;
 
+import com.example.ZZfishing.api.profile.repository.entity.Profile;
+
 public class UserRequestBodyDto {
 
     //private Long profileId;
     private String email;
     private String password;
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
     /*public Long getProfileId() {
         return profileId;
