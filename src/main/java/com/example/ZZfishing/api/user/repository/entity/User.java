@@ -15,7 +15,7 @@ public class User extends IdEntity {
     private String password;
     private String email;
 
-    @OneToOne(optional = false, cascade= CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade= CascadeType.ALL)
     private Profile profile;
 
     public User() {
