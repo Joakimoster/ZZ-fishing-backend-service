@@ -16,7 +16,7 @@ public class FishingLure extends IdEntity {
     private int weight;
     private String label;
 
-    @OneToOne(mappedBy = "fishingLure", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "fishingLure", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Catching catching;
 
     public FishingLure() {

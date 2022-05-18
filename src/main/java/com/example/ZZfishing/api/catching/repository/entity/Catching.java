@@ -22,19 +22,20 @@ public class Catching extends IdEntity{
     @Enumerated(EnumType.STRING)
     private FishMethod fishMethod;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fishingLure_id")
     private FishingLure fishingLure;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fish_id")
     private Fish fish;
 
     /*@ManyToOne
     @JoinColumn(name = "history_id")
     private History history;*/
 
-
     @ManyToOne
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
     public Catching() {
