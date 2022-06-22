@@ -37,7 +37,7 @@ public class ProfileController implements IProfileController{
         return new ResponseEntity<>(profiles, httpStatus);
     }
 
-    @GetMapping("/entity/{profileId}")
+    @GetMapping("/entity/{id}")
     @Operation(summary = "Get profileDto by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "ProfileDto fetched by id"),
