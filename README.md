@@ -15,7 +15,6 @@ React Native will serve as front-end for this application and will be integrated
 ## Authors and acknowledgment
 * Joakim Österberg
 * Alexander Idemark
-* Ante Hellgren
 
 ## Project status
 This README file will be updated on the fly due to new development into the application. 
