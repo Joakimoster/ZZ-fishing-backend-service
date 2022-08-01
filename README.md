@@ -4,7 +4,7 @@ ZZ-fishing is a software project where a user will be able to use a mobile appli
 ## Description
 This repo includes a Java Spring boot application which serves as a backend-api together with PostgreSQL for storing data. Swagger UI are available as API-documentation for developers and users. 
 
-React Native will serve as front-end for this application and will be integrated soon.
+React Native will serve as front-end for this application and will be developed in the future.
 
 ## Technologies
 * Java 17
