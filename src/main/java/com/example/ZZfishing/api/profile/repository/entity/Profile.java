@@ -22,7 +22,7 @@ public class Profile extends IdEntity {
     @OneToMany(mappedBy = "profile")
     private List<Catching> catchings;
 
-    @OneToOne(mappedBy = "profile",cascade= CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, mappedBy = "profile")
     private User user;
 
     public Profile() {

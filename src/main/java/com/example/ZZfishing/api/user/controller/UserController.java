@@ -1,5 +1,7 @@
 package com.example.ZZfishing.api.user.controller;
 
+import com.example.ZZfishing.api.user.repository.entity.dto.UserRequestBodyDto;
+import com.example.ZZfishing.api.user.repository.entity.dto.UserResponseDto;
 import com.example.ZZfishing.api.user.service.UserService;
 import com.example.ZZfishing.api.user.repository.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,8 +54,8 @@ public class UserController implements IUserController{
             @ApiResponse(responseCode = "200", description = "New user was successfully created"),
             @ApiResponse(responseCode = "500", description = "Unable to create a new user due to internal error")
     })
-    public ResponseEntity<User> registerNewUser(@RequestBody User user) {
-        User returnUser = userService.addNewUser(user);
+    public ResponseEntity<UserResponseDto> registerNewUser(@RequestBody UserRequestBodyDto user) {
+        UserResponseDto returnUser = userService.addNewUser(user);
         HttpStatus httpStatus = HttpStatus.CREATED;
         return new ResponseEntity<>(returnUser, httpStatus);
     }

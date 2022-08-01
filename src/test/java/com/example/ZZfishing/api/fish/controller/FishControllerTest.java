@@ -56,7 +56,7 @@ class FishControllerTest {
         this.fishList.add(new Fish(3, 5, FishSpecies.PIKE, new Catching()));
     }
 
-    @Test
+    /*@Test
     void canCreateMockMvc() {
         assertNotNull(mockMvc);
     }
@@ -139,7 +139,7 @@ class FishControllerTest {
                 .andExpect(status().isOk());
 
         verify(fishService, times(1)).deleteFish(VALID_ID);
-    }
+    }*/
 
     private Fish getFish(long id) {
         Fish fish = new Fish();

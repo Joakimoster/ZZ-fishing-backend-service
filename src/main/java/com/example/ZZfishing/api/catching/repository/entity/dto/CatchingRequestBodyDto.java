@@ -1,4 +1,4 @@
-package com.example.ZZfishing.api.catching.dto;
+package com.example.ZZfishing.api.catching.repository.entity.dto;
 
 import com.example.ZZfishing.api.catching.repository.enums.FishMethod;
 import com.example.ZZfishing.api.fish.repository.entity.Fish;

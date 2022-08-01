@@ -1,10 +1,8 @@
-package com.example.ZZfishing.api.catching.dto;
-
-import com.example.ZZfishing.api.fish.repository.entity.Fish;
+package com.example.ZZfishing.api.catching.repository.entity.dto;
 
 import java.util.Date;
 
-public class CatchingReponseDto {
+public class CatchingResponseDto {
 
     private String weather;
     private Long fishId;

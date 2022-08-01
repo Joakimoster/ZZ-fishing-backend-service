@@ -19,7 +19,7 @@ public class Fish extends IdEntity {
     @Enumerated(EnumType.STRING)
     private FishSpecies fishSpecies;
 
-    @OneToOne(optional = false,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "fish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Catching catching;
 
     public Fish() {
