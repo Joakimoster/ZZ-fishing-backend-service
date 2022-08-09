@@ -30,10 +30,6 @@ public class Catching extends IdEntity{
     @JoinColumn(name = "fish_id")
     private Fish fish;
 
-    /*@ManyToOne
-    @JoinColumn(name = "history_id")
-    private History history;*/
-
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
@@ -57,14 +53,6 @@ public class Catching extends IdEntity{
     public void setFish(Fish fish) {
         this.fish = fish;
     }
-
-    /*public History getHistory() {
-        return history;
-    }
-
-    public void setHistory(History history) {
-        this.history = history;
-    }*/
 
     public Date getCatchingDate() {
         return catchingDate;

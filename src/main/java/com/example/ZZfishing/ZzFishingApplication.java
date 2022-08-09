@@ -39,8 +39,7 @@ public class ZzFishingApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		/*
-			User 1
-		 */
+		//User 1
 		FishingLure fishingLure = new FishingLure();
 		fishingLure.setType("Spin");
 		fishingLure.setLabel("Bravo label");
@@ -98,10 +97,7 @@ public class ZzFishingApplication implements CommandLineRunner {
 		userRepository.save(user);
 		catchingRepository.save(catching);
 
-
-		/*
-			User 2
-		 */
+		//User 2
 		FishingLure fishingLure2 = new FishingLure();
 		fishingLure2.setType("Old lure");
 		fishingLure2.setLabel("Swedish label");
@@ -158,5 +154,6 @@ public class ZzFishingApplication implements CommandLineRunner {
 
 		userRepository.save(user2);
 		catchingRepository.save(catching3);
+	}*/
 	}
 }
